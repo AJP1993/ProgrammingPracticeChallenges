@@ -18,6 +18,7 @@ namespace ProgrammingPracticeChallenges
             Console.WriteLine("");
             Console.WriteLine("1. Fizzbuzz");
             Console.WriteLine("2. Unwinnable Single Pile Nim");
+            Console.WriteLine("3. Winnable Single Pile Nim");
             Console.WriteLine("");
             Console.WriteLine("0. Exit");
 
@@ -171,6 +172,122 @@ namespace ProgrammingPracticeChallenges
 
         }
 
+        public static void winnableNim()
+        {
+            Console.Clear();
+
+            Console.WriteLine("In single pile nim, there is a pile of 12 marbles");
+            Console.WriteLine("Each player can take between 1 and 3 marbles");
+            Console.WriteLine("The player to take the last marble wins");
+            Console.WriteLine("As the 'superior' Human, you may go first");
+            Console.WriteLine("Press Enter to begin");
+            Console.ReadLine();
+
+            Console.Clear();
+            int marbles = 12;
+            bool playerWin = false;
+            int playerChoice;
+            Random random = new Random();
+            int compChoice = random.Next(1, 4);
+
+            marbles = marbles - compChoice;
+
+            if (compChoice == 1)
+            {
+                Console.WriteLine("The Computer took " + compChoice + " marble");
+            }
+
+            else
+            {
+                Console.WriteLine("The Computer took " + compChoice + " marbles");
+            }
+
+            while (true)
+            {
+                while (true)
+                {
+                    for (int marblePic = marbles; marblePic > 0; marblePic--)
+                    {
+                        Console.Write("O ");
+                    }
+
+                    Console.WriteLine();
+
+                    Console.WriteLine("There are " + marbles + " marbles left");
+                    Console.WriteLine("How Many Marbles are you going to take?");
+
+                    try
+                    {
+                        playerChoice = Convert.ToInt32(Console.ReadLine());
+                    }
+
+                    catch
+                    {
+                        playerChoice = 0;
+                    }
+
+
+
+                    if (playerChoice > 0 && playerChoice < 4)
+                    {
+                        marbles = marbles - playerChoice;
+
+                        if (marbles < 1)
+                        {
+                            playerWin = true;
+                        }
+
+                        break;
+                    }
+                    Console.Clear();
+                    Console.WriteLine("Invalid choice, please take between 1 and 3 marbles.");
+                }
+
+                if (playerWin == true)
+                {
+                    Console.WriteLine("You won!");
+                    Console.WriteLine("It's a lot easier going second.");
+                    Console.WriteLine("Press Enter to return to the main menu");
+                    Console.ReadLine();
+                    break;
+                }
+
+                if (marbles % 4 == 0)
+                {
+                    compChoice = 4 - playerChoice;
+                    marbles = marbles - compChoice;
+                }
+
+                else
+                {
+                    compChoice = marbles % 4;
+                    marbles = marbles - compChoice;
+                }
+                
+
+                Console.Clear();
+
+                if (compChoice == 1)
+                {
+                    Console.WriteLine("The Computer took " + compChoice + " marble");
+                }
+
+                else
+                {
+                    Console.WriteLine("The Computer took " + compChoice + " marbles");
+                }
+
+                if (marbles < 1)
+                {
+                    Console.WriteLine("You lost!");
+                    Console.WriteLine("The computer won't let you make a mistake");
+                    Console.WriteLine("Press Enter to return to the main menu");
+                    Console.ReadLine();
+                    break;
+                }
+            }
+
+        }
         static void Main(string[] args)
         {
             do
@@ -185,6 +302,11 @@ namespace ProgrammingPracticeChallenges
                 if (menuChoice == 2)
                 {
                     singleNim();
+                }
+
+                if (menuChoice == 3)
+                {
+                    winnableNim();
                 }
             } while (menuChoice != 0);
         }
