@@ -17,6 +17,7 @@ namespace ProgrammingPracticeChallenges
             Console.WriteLine("Select a Solution");
             Console.WriteLine("");
             Console.WriteLine("1. Fizzbuzz");
+            Console.WriteLine("2. Unwinnable Single Pile Nim");
             Console.WriteLine("");
             Console.WriteLine("0. Exit");
 
@@ -77,6 +78,99 @@ namespace ProgrammingPracticeChallenges
 
         }
 
+        public static void singleNim()
+        {
+            Console.Clear();
+
+            Console.WriteLine("In single pile nim, there is a pile of 12 marbles");
+            Console.WriteLine("Each player can take between 1 and 3 marbles");
+            Console.WriteLine("The player to take the last marble wins");
+            Console.WriteLine("As the 'superior' Human, you may go first");
+            Console.WriteLine("Press Enter to begin");
+            Console.ReadLine();
+
+            Console.Clear();
+            int marbles = 12;
+            bool playerWin = false;
+            int playerChoice;
+            int compChoice;
+
+            while(true)
+            {
+                while(true)
+                {
+                    for ( int marblePic = marbles; marblePic > 0; marblePic--)
+                    {
+                        Console.Write("O ");
+                    }
+
+                    Console.WriteLine();
+
+                    Console.WriteLine("There are " + marbles + " marbles left");
+                    Console.WriteLine("How Many Marbles are you going to take?");
+
+                    try
+                    {
+                        playerChoice = Convert.ToInt32(Console.ReadLine());
+                    }
+
+                    catch
+                    {
+                        playerChoice = 0;
+                    }
+
+
+
+                    if (playerChoice > 0 && playerChoice < 4)
+                    {
+                        marbles = marbles - playerChoice;
+
+                        if (marbles < 1)
+                        {
+                            playerWin = true;
+                        }
+
+                        break;
+                    }
+                    Console.Clear();
+                    Console.WriteLine("Invalid choice, please take between 1 and 3 marbles.");
+                }
+
+                if (playerWin == true)
+                {
+                    Console.WriteLine("You won, somehow...");
+                    Console.WriteLine("Press Enter to return to the main menu");
+                    Console.ReadLine();
+                    break;
+                }
+
+                compChoice = 4 - playerChoice;
+                marbles = marbles - compChoice;
+
+                Console.Clear();
+
+                if (compChoice == 1)
+                {
+                    Console.WriteLine("The Computer took " + compChoice + " marble");
+                }
+
+                else
+                {
+                    Console.WriteLine("The Computer took " + compChoice + " marbles");
+                }              
+
+                if (marbles < 1)
+                {
+                    Console.WriteLine("You lost!");
+                    Console.WriteLine("Don't worry, victory was impossible");
+                    Console.WriteLine("Press Enter to return to the main menu");
+                    Console.ReadLine();
+                    break;
+                }
+            } 
+
+        }
+
         static void Main(string[] args)
         {
             do
@@ -88,6 +182,10 @@ namespace ProgrammingPracticeChallenges
                     fizzBuzz();
                 }
 
+                if (menuChoice == 2)
+                {
+                    singleNim();
+                }
             } while (menuChoice != 0);
         }
     }
