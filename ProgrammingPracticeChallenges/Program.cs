@@ -179,7 +179,8 @@ namespace ProgrammingPracticeChallenges
             Console.WriteLine("In single pile nim, there is a pile of 12 marbles");
             Console.WriteLine("Each player can take between 1 and 3 marbles");
             Console.WriteLine("The player to take the last marble wins");
-            Console.WriteLine("As the 'superior' Human, you may go first");
+            Console.WriteLine("In this version, the computer will go first, allowing you the chance to win");
+            Console.WriteLine("Make a Mistake however, and it will capitalize on it.");
             Console.WriteLine("Press Enter to begin");
             Console.ReadLine();
 
